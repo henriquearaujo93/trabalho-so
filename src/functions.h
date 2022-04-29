@@ -4,6 +4,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#define clear() printf("\033[H\033[J")
+
 typedef enum { FALSE, TRUE } bool;
 
 //Functions Prototypes

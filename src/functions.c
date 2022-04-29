@@ -21,21 +21,26 @@ void printMenu() {
 //Função para mostrar conteúdo do ficheiro
 void mostraFicheiro(char *fileName) {
 
+    char opcao;
     int file;
 
+    printf("------------------------------------------------------------------\n");
+    
     //Abrir arquivo
-    if (verificarFicheiroExiste(fileName) == TRUE) {
-        
-        char readBuffer[bytesFicheiro(fileName)];
-        file = open(fileName, O_RDONLY);
-        
-        read(file, readBuffer, sizeof(readBuffer));
-        write(STDIN_FILENO, readBuffer, sizeof(readBuffer));
-        close(file);
 
-    } else {
-        perror("Ficheiro nao existe!");
-    }
+    char readBuffer[bytesFicheiro(fileName)];
+    file = open(fileName, O_RDONLY);
+        
+    read(file, readBuffer, sizeof(readBuffer));
+    write(STDIN_FILENO, readBuffer, sizeof(readBuffer));
+    close(file);
+
+    printf("\n----------------------------------------------------------------\n");
+
+    do {
+        printf("Pression 'v' para voltar:");
+        scanf(" %c", &opcao);
+    } while (opcao != 'v' && opcao != 'V');
 }
 
 //Helpers
@@ -50,7 +55,6 @@ int tamanhoString(char *name) {
 }
 
 bool verificarFicheiroExiste(char *fileName) {
-
     if (open(fileName, O_RDONLY) == -1) {
         return FALSE;
     } else {

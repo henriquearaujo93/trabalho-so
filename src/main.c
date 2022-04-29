@@ -14,12 +14,23 @@ int main(int argc,char * argv[]) {
 
         switch (opcao) {
             case 1:
-                //TODO: Mostra Ficheiro
-                printf("Insira o caminho do ficheiro: ");
-                scanf("%s", fileName);
+                clear();
+
+                do {
+                    printf("Insira o caminho do ficheiro: ");
+                    scanf("%s", fileName);
+
+                    if (verificarFicheiroExiste(fileName) == FALSE) {
+                        perror("Erro ao ler ficheiro!\n");
+                    }
+
+                } while (verificarFicheiroExiste(fileName) == FALSE);
+
+                clear();
 
                 mostraFicheiro(fileName);
                 
+                clear();
                 break;
             case 2:
                 //TODO: Copia Ficheiro
