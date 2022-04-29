@@ -14,3 +14,4 @@ void mostraFicheiro(char *fileName);
 int tamanhoString(char *name);
 bool verificarFicheiroExiste(char *fileName);
 int bytesFicheiro(char *fileName);
+void deletarFicheiro(char *fileName);

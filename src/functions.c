@@ -43,6 +43,20 @@ void mostraFicheiro(char *fileName) {
     } while (opcao != 'v' && opcao != 'V');
 }
 
+void deletarFicheiro(char *filename)
+{
+    char opcao;
+
+
+    unlink(filename);
+    printf("Ficheiro Deletado com sucesso!!\n");
+
+    do {
+        printf("Pression 'v' para voltar:");
+        scanf(" %c", &opcao);
+    } while (opcao != 'v' && opcao != 'V');
+}
+
 //Helpers
 int tamanhoString(char *name) {
     int counter = 0;
