@@ -17,12 +17,18 @@ void printMenu() {
     printf("  [0] -> SAIR\n");
     printf("opcao: ");
 }
+<<<<<<< HEAD
+//Função para mostrar conteúdo do ficheiro
+void mostraFicheiro(char *fileName) 
+{
+=======
 
 /*-------------------------------- Funções de sistema --------------------------------*/
 
 //Mostrar conteúdo do ficheiro
 void mostraFicheiro(char *fileName) {
 
+>>>>>>> 1a872b736c2c4a64ec82e68f2d22c19475c9921f
     char opcao;
     int file;
 
@@ -123,6 +129,42 @@ void deletarFicheiro(char *filename)
         printf("Pression 'v' para voltar:");
         scanf(" %c", &opcao);
     } while (opcao != 'v' && opcao != 'V');
+}
+int contarLinhas(char *fileName)
+{
+    int fd, count=0;
+    int size = bytesFicheiro(fileName);
+    char readBuffer[bytesFicheiro(fileName)];
+    char *apont;
+
+    fd = open(fileName, O_RDONLY);
+        
+    read(fd, readBuffer, sizeof(readBuffer));
+
+    
+
+    apont = strtok(readBuffer, "\n");
+
+    while(apont != NULL)
+    {
+        count ++;
+        apont = strtok(NULL, "\n");
+    }
+    
+    close(fd);
+
+    printf("%d", count);
+    return count;
+}
+
+void listarFicheiros(char *diretoria)
+{
+    
+
+
+
+    
+
 }
 
 /*-------------------------------- Helpers --------------------------------*/

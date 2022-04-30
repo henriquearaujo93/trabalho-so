@@ -85,6 +85,22 @@ int main(int argc,char * argv[]) {
 
                 break;
             case 4:
+                clear();
+
+                do {
+                    printf("Insira o caminho do ficheiro: ");
+                    scanf("%s", fileName);
+
+                    if (verificarFicheiroExiste(fileName) == FALSE) {
+                        perror("Erro ao ler ficheiro!\n");
+                    }
+
+                } while (verificarFicheiroExiste(fileName) == FALSE);
+
+                clear();
+
+                printf("Linhas: %d", contarLinhas(fileName));
+                
                 //TODO: Conta Ficheiro
                 break;
             case 5:
