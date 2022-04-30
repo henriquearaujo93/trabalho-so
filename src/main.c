@@ -54,7 +54,6 @@ int main(int argc,char * argv[]) {
 
                 break;
             case 3:
-                //TODO: Acrescenta origem destino
                 clear();
 
                 do {
