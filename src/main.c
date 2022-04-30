@@ -17,11 +17,11 @@ int main(int argc,char * argv[]) {
                 clear();
 
                 do {
-                    printf("Insira o caminho do ficheiro: ");
+                    printf("> Insira o caminho do ficheiro: ");
                     scanf("%s", fileName);
 
                     if (verificarFicheiroExiste(fileName) == FALSE) {
-                        perror("Erro ao ler ficheiro!\n");
+                        perror("    > Erro ao ler ficheiro!");
                     }
 
                 } while (verificarFicheiroExiste(fileName) == FALSE);
@@ -33,7 +33,24 @@ int main(int argc,char * argv[]) {
                 clear();
                 break;
             case 2:
-                //TODO: Copia Ficheiro
+                clear();
+
+                do {
+                    printf("> Insira o caminho do ficheiro a ser copiado: ");
+                    scanf("%s", fileName);
+
+                    if (verificarFicheiroExiste(fileName) == FALSE) {
+                        perror("    > Erro ao ler ficheiro!");
+                    }
+
+                } while (verificarFicheiroExiste(fileName) == FALSE);
+
+                clear();
+
+                copiarFicheiro(fileName);
+                
+                clear();
+
                 break;
             case 3:
                 //TODO: Acrescenta origem destino
@@ -45,11 +62,11 @@ int main(int argc,char * argv[]) {
                 clear();
 
                 do {
-                    printf("Insira o caminho do ficheiro: ");
+                    printf("> Insira o caminho do ficheiro: ");
                     scanf("%s", fileName);
 
                     if (verificarFicheiroExiste(fileName) == FALSE) {
-                        perror("Erro ao ler ficheiro!\n");
+                        perror("    > Erro ao ler ficheiro!");
                     }
 
                 } while (verificarFicheiroExiste(fileName) == FALSE);
@@ -60,7 +77,6 @@ int main(int argc,char * argv[]) {
                 
                 clear();
 
-                //TODO: Apaga Ficheiro
                 break;
             case 6:
                 //TODO: Informa Ficheiro

@@ -18,7 +18,9 @@ void printMenu() {
     printf("opcao: ");
 }
 
-//Função para mostrar conteúdo do ficheiro
+/*-------------------------------- Funções de sistema --------------------------------*/
+
+//Mostrar conteúdo do ficheiro
 void mostraFicheiro(char *fileName) {
 
     char opcao;
@@ -27,7 +29,6 @@ void mostraFicheiro(char *fileName) {
     printf("------------------------------------------------------------------\n");
     
     //Abrir arquivo
-
     char readBuffer[bytesFicheiro(fileName)];
     file = open(fileName, O_RDONLY);
         
@@ -35,7 +36,7 @@ void mostraFicheiro(char *fileName) {
     write(STDIN_FILENO, readBuffer, sizeof(readBuffer));
     close(file);
 
-    printf("\n----------------------------------------------------------------\n");
+    printf("\n------------------------------------------------------------------\n");
 
     do {
         printf("Pression 'v' para voltar:");
@@ -43,13 +44,50 @@ void mostraFicheiro(char *fileName) {
     } while (opcao != 'v' && opcao != 'V');
 }
 
+//Copiar ficheiro
+void copiarFicheiro(char *fileName) {
+
+    int file, newFile;
+    char readBuffer[bytesFicheiro(fileName)];
+    char opcao;
+
+    char *aux = ".copia";
+    char newString[tamanhoString(fileName) + tamanhoString(aux)];
+
+    concatenarString(fileName, aux, newString);
+
+    file = open(fileName, O_RDONLY);
+    newFile = open(newString, O_RDWR|O_CREAT, S_IRUSR | S_IWUSR);
+
+    read(file, readBuffer, sizeof(readBuffer));
+    int result = write(newFile, readBuffer, sizeof(readBuffer));
+    close(file);
+    close(newFile);
+
+    if (result < 0) {
+        perror("> Nada foi escrito!");
+    } else {
+        printf("> Ficheiro copiado com sucesso!\n");
+        printf("    > Foram copiados: %d bytes para o ficheiro '%s'\n", result, newString);
+    }
+
+    printf("------------------------------------------------------------------\n");
+
+    do {
+        printf("Pression 'v' para voltar:");
+        scanf(" %c", &opcao);
+    } while (opcao != 'v' && opcao != 'V');
+}
+
+//Deletar um ficheiro
 void deletarFicheiro(char *filename)
 {
     char opcao;
 
-
     unlink(filename);
     printf("Ficheiro Deletado com sucesso!!\n");
+
+    printf("------------------------------------------------------------------\n");
 
     do {
         printf("Pression 'v' para voltar:");
@@ -57,7 +95,7 @@ void deletarFicheiro(char *filename)
     } while (opcao != 'v' && opcao != 'V');
 }
 
-//Helpers
+/*-------------------------------- Helpers --------------------------------*/
 int tamanhoString(char *name) {
     int counter = 0;
 
@@ -84,4 +122,22 @@ int bytesFicheiro(char *fileName) {
     } else {
         return sb.st_size;
     }
+}
+
+void concatenarString(char *str1, char *str2, char *newString) {
+
+    int length = 0;
+
+    while(str1[length] != '\0') {
+        newString[length] = str1[length];
+        length++;
+    }
+
+    //Concatenar strings
+    for (int i = 0; str2[i] != '\0'; i++) {
+        newString[length] = str2[i];
+        length++;
+    }
+
+    newString[length] = '\0';
 }
