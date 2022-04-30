@@ -17,18 +17,10 @@ void printMenu() {
     printf("  [0] -> SAIR\n");
     printf("opcao: ");
 }
-<<<<<<< HEAD
+
 //Função para mostrar conteúdo do ficheiro
 void mostraFicheiro(char *fileName) 
 {
-=======
-
-/*-------------------------------- Funções de sistema --------------------------------*/
-
-//Mostrar conteúdo do ficheiro
-void mostraFicheiro(char *fileName) {
-
->>>>>>> 1a872b736c2c4a64ec82e68f2d22c19475c9921f
     char opcao;
     int file;
 
@@ -130,18 +122,19 @@ void deletarFicheiro(char *filename)
         scanf(" %c", &opcao);
     } while (opcao != 'v' && opcao != 'V');
 }
-int contarLinhas(char *fileName)
+
+//Contar linhas Ficheiro
+void contarLinhas(char *fileName)
 {
     int fd, count=0;
     int size = bytesFicheiro(fileName);
     char readBuffer[bytesFicheiro(fileName)];
     char *apont;
+    char opcao;
 
     fd = open(fileName, O_RDONLY);
         
     read(fd, readBuffer, sizeof(readBuffer));
-
-    
 
     apont = strtok(readBuffer, "\n");
 
@@ -153,17 +146,50 @@ int contarLinhas(char *fileName)
     
     close(fd);
 
-    printf("%d", count);
-    return count;
+    printf("Numero de linhas: %d\n", count);
+
+    printf("\n------------------------------------------------------------------\n");
+
+    do {
+        printf("Pressione 'v' para voltar:");
+        scanf(" %c", &opcao);
+    } while (opcao != 'v' && opcao != 'V');
+
 }
 
-void listarFicheiros(char *diretoria)
+//Listar Diretorio
+void listarDiretorio(char *diretoria)
 {
-    
 
+    DIR *dir;
+    struct dirent *entry;
+    struct stat filestat;
+    char opcao;
 
+    if ((dir = opendir(diretoria)) == NULL) {
+        perror("Erro ao abrir diretorio");
+    } else {
+        printf("> Conteudo de: %s: \n", diretoria);
+        
+        while((entry = readdir(dir))) {
+            stat(entry->d_name, &filestat);
 
-    
+            if (S_ISDIR(filestat.st_mode)) {
+                printf("%s: %s\n","Dir",entry->d_name);
+            } else {
+                printf("%s: %s\n","File",entry->d_name);
+            }
+        }
+        
+        closedir(dir);
+    }
+
+    printf("\n------------------------------------------------------------------\n");
+
+    do {
+        printf("Pressione 'v' para voltar:");
+        scanf(" %c", &opcao);
+    } while (opcao != 'v' && opcao != 'V');
 
 }
 

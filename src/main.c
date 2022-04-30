@@ -99,9 +99,10 @@ int main(int argc,char * argv[]) {
 
                 clear();
 
-                printf("Linhas: %d", contarLinhas(fileName));
+                contarLinhas(fileName);
                 
-                //TODO: Conta Ficheiro
+                clear();
+                
                 break;
             case 5:
                 clear();
@@ -127,12 +128,29 @@ int main(int argc,char * argv[]) {
                 //TODO: Informa Ficheiro
                 break;
             case 7:
-                //TODO: Lista Diretoria
+
+                clear();
+
+                do {
+                    printf("Insira o diretorio: ");
+                    scanf("%s", fileName);
+
+                    if (verificarFicheiroExiste(fileName) == FALSE) {
+                        fileName = "./";
+                    }
+
+                } while (verificarFicheiroExiste(fileName) == FALSE);
+
+                clear();
+
+                listarDiretorio(fileName);
+
+                clear();
+
                 break;
             default:
                 break;
         }
 
     } while (opcao != 0);
-
 }
