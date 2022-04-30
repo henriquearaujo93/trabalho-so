@@ -15,3 +15,4 @@ int tamanhoString(char *name);
 bool verificarFicheiroExiste(char *fileName);
 int bytesFicheiro(char *fileName);
 void deletarFicheiro(char *fileName);
+int contarLinhas(char *fileName);

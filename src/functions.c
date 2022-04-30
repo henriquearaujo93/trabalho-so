@@ -17,10 +17,9 @@ void printMenu() {
     printf("  [0] -> SAIR\n");
     printf("opcao: ");
 }
-
 //Função para mostrar conteúdo do ficheiro
-void mostraFicheiro(char *fileName) {
-
+void mostraFicheiro(char *fileName) 
+{
     char opcao;
     int file;
 
@@ -55,6 +54,42 @@ void deletarFicheiro(char *filename)
         printf("Pression 'v' para voltar:");
         scanf(" %c", &opcao);
     } while (opcao != 'v' && opcao != 'V');
+}
+int contarLinhas(char *fileName)
+{
+    int fd, count=0;
+    int size = bytesFicheiro(fileName);
+    char readBuffer[bytesFicheiro(fileName)];
+    char *apont;
+
+    fd = open(fileName, O_RDONLY);
+        
+    read(fd, readBuffer, sizeof(readBuffer));
+
+    
+
+    apont = strtok(readBuffer, "\n");
+
+    while(apont != NULL)
+    {
+        count ++;
+        apont = strtok(NULL, "\n");
+    }
+    
+    close(fd);
+
+    printf("%d", count);
+    return count;
+}
+
+void listarFicheiros(char *diretoria)
+{
+    
+
+
+
+    
+
 }
 
 //Helpers
