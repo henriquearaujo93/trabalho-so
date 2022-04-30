@@ -5,6 +5,7 @@ int main(int argc,char * argv[]) {
     int opcao;
 
     char *fileName;
+    char *fileName2;
 
     fileName = malloc(sizeof(fileName));
 
@@ -54,6 +55,35 @@ int main(int argc,char * argv[]) {
                 break;
             case 3:
                 //TODO: Acrescenta origem destino
+                clear();
+
+                do {
+                    printf("> Insira o caminho do ficheiro 1: ");
+                    scanf("%s", fileName);
+
+                    if (verificarFicheiroExiste(fileName) == FALSE) {
+                        perror("    > Erro ao ler ficheiro!");
+                    }
+
+                } while (verificarFicheiroExiste(fileName) == FALSE);
+
+                do {
+                    printf("> Insira o caminho do ficheiro 2: ");
+                    scanf("%s", fileName2);
+
+                    if (verificarFicheiroExiste(fileName2) == FALSE) {
+                        perror("    > Erro ao ler ficheiro!");
+                    }
+
+                } while (verificarFicheiroExiste(fileName2) == FALSE);
+
+                clear();
+
+                acrescentaDestino(fileName, fileName2);
+
+                clear();
+
+
                 break;
             case 4:
                 //TODO: Conta Ficheiro

@@ -79,6 +79,36 @@ void copiarFicheiro(char *fileName) {
     } while (opcao != 'v' && opcao != 'V');
 }
 
+//Acrescenta origem destino
+void acrescentaDestino(char *fileOrigem, char *fileDestino) {
+
+    int file1, file2;
+    char readBuffer[bytesFicheiro(fileOrigem)];
+    char opcao;
+
+    file1 = open(fileOrigem, O_RDONLY);
+    file2 = open(fileDestino, O_WRONLY | O_APPEND);
+    
+    read(file1, readBuffer, sizeof(readBuffer));
+    int result = write(file2, readBuffer, sizeof(readBuffer));
+    close(file1);
+    close(file2);
+
+    if (result == -1) {
+        perror("> Nada foi escrito!\n");
+    } else {
+        printf("> Ficheiro copiado com sucesso!\n");
+    }
+
+    printf("\n------------------------------------------------------------------\n");
+
+    do {
+        printf("Pressione 'v' para voltar:");
+        scanf(" %c", &opcao);
+    } while (opcao != 'v' && opcao != 'V');
+
+}
+
 //Deletar um ficheiro
 void deletarFicheiro(char *filename)
 {

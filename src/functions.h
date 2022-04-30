@@ -18,3 +18,4 @@ void deletarFicheiro(char *fileName);
 void copiarFicheiro(char *fileName);
 void concatenarString(char *str1, char *str2, char *newString);
 int tamanhoString(char *name);
+void acrescentaDestino(char *fileOrigem, char *fileDestino);
