@@ -67,8 +67,6 @@ int main(int argc,char * argv[]) {
 
                 } while (verificarFicheiroExiste(fileName) == FALSE);
 
-                printf("TESTE\n");
-
                 do {
                     printf("> Insira o caminho do ficheiro 2: ");
                     scanf("%s", fileName2);
@@ -149,7 +147,6 @@ int main(int argc,char * argv[]) {
                 //TODO: Informa Ficheiro
                 break;
             case 7:
-
                 clear();
 
                 do {
@@ -174,4 +171,8 @@ int main(int argc,char * argv[]) {
         }
 
     } while (opcao != 0);
+
+    free(fileName);
+    free(fileName2);
+
 }
