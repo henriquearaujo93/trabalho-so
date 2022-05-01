@@ -6,6 +6,10 @@
 #include <dirent.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include <pwd.h>
+#include <grp.h>
+#include <time.h>
+#include <sys/types.h>
 
 #define clear() printf("\033[H\033[J")
 
@@ -24,3 +28,4 @@ int tamanhoString(char *name);
 void acrescentaDestino(char *fileOrigem, char *fileDestino);
 void contarLinhas(char *fileName);
 void listarDiretorio(char *diretoria);
+void informa(char *fileName);

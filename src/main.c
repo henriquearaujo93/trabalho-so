@@ -128,6 +128,24 @@ int main(int argc,char * argv[]) {
 
                 break;
             case 6:
+                clear();
+
+                do {
+                    printf("> Insira o caminho do ficheiro: ");
+                    scanf("%s", fileName);
+
+                    if (verificarFicheiroExiste(fileName) == FALSE) {
+                        perror("    > Erro ao ler ficheiro!");
+                    }
+
+                } while (verificarFicheiroExiste(fileName) == FALSE);
+
+                clear();
+
+                informa(fileName);
+                
+                clear();
+
                 //TODO: Informa Ficheiro
                 break;
             case 7:
