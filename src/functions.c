@@ -157,6 +157,49 @@ void contarLinhas(char *fileName)
 
 }
 
+void informa(char *filename)
+{
+
+    struct stat sfile;
+    struct tm dt;
+    char opcao;
+    
+    stat(filename,&sfile);
+
+    struct passwd *pw = getpwuid(sfile.st_uid);
+    struct group  *gr = getgrgid(sfile.st_gid);
+
+    //Accessing data members of stat struct
+    if(S_ISDIR(sfile.st_mode))
+    {
+    printf("\nTipo: Diretoria\n");
+    }
+    else if(S_ISREG(sfile.st_mode))
+    {
+    printf("\nTipo: Ficheiro Regular\n");
+    }
+    else if(S_ISLNK(sfile.st_mode))
+    {
+    printf("\nTipo: Link");
+    }
+    printf("\nI-node: %ld\n",sfile.st_ino);
+    printf("\nUid: (        %d/       %s)\n",sfile.st_uid,pw->pw_name);
+    printf("\nGrupo: %s\n", gr->gr_name);
+    dt = *(gmtime(&sfile.st_ctime));
+        printf("\nCriado em: %d-%d-%d %d:%d:%d\n", dt.tm_mday, dt.tm_mon + 1, dt.tm_year + 1900, dt.tm_hour + 1, dt.tm_min, dt.tm_sec);
+    dt = *(gmtime(&sfile.st_mtime));
+        printf("\nUltima modifcação: %d-%d-%d %d:%d:%d\n", dt.tm_mday, dt.tm_mon + 1, dt.tm_year + 1900, dt.tm_hour + 1, dt.tm_min, dt.tm_sec);
+    dt = *(gmtime(&sfile.st_atime));
+        printf("\nUltmo acesso: %d-%d-%d %d:%d:%d\n", dt.tm_mday, dt.tm_mon + 1, dt.tm_year + 1900, dt.tm_hour + 1, dt.tm_min, dt.tm_sec);
+    printf("\n");
+
+    do {
+            printf("Pressione 'v' para voltar:");
+            scanf(" %c", &opcao);
+        } while (opcao != 'v' && opcao != 'V');
+
+}
+
 //Listar Diretorio
 void listarDiretorio(char *diretoria)
 {
@@ -174,10 +217,32 @@ void listarDiretorio(char *diretoria)
         while((entry = readdir(dir))) {
             stat(entry->d_name, &filestat);
 
-            if (S_ISDIR(filestat.st_mode)) {
+            if (S_ISDIR(filestat.st_mode)) 
+            {
                 printf("%s: %s\n","Dir",entry->d_name);
-            } else {
+            }
+            else if(S_ISREG(filestat.st_mode))
+            {
                 printf("%s: %s\n","File",entry->d_name);
+
+            }
+            else if(S_ISCHR(filestat.st_mode))
+            {
+                printf("%s: %s\n","Carateres ",entry->d_name);
+
+            }
+            else if(S_ISBLK(filestat.st_mode))
+            {
+                printf("%s: %s\n","File",entry->d_name);
+
+            }
+            else if(S_ISLNK(filestat.st_mode))
+            {
+                 printf("%s: %s\n","Link",entry->d_name);
+            }
+            else
+            {
+                printf("%s: %s\n","None",entry->d_name);
             }
         }
         
