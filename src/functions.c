@@ -88,6 +88,7 @@ void acrescentaDestino(char *fileOrigem, char *fileDestino) {
     file2 = open(fileDestino, O_WRONLY | O_APPEND);
     
     read(file1, readBuffer, sizeof(readBuffer));
+    printf("asdasd/n");
     int result = write(file2, readBuffer, sizeof(readBuffer));
     close(file1);
     close(file2);

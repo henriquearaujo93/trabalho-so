@@ -8,6 +8,7 @@ int main(int argc,char * argv[]) {
     char *fileName2;
 
     fileName = malloc(sizeof(fileName));
+    fileName2 = malloc(sizeof(fileName2));
 
     do {
         printMenu();
@@ -65,6 +66,8 @@ int main(int argc,char * argv[]) {
                     }
 
                 } while (verificarFicheiroExiste(fileName) == FALSE);
+
+                printf("TESTE\n");
 
                 do {
                     printf("> Insira o caminho do ficheiro 2: ");
